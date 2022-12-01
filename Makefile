@@ -2,6 +2,7 @@ DC=docker-compose
 DC_EXEC=$(DC) exec
 FRONTEND=$(DC_EXEC) party-games-frontend
 NPM=$(FRONTEND) npm run
+FIREBASE=$(FRONTEND) firebase
 
 start:
 	$(DC) up -d
@@ -20,3 +21,6 @@ dev:
 
 start-dev:
 	$(DC) up -d && $(NPM) dev
+
+deploy:
+	$(FIREBASE) deploy
