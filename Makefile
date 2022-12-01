@@ -22,5 +22,8 @@ dev:
 start-dev:
 	$(DC) up -d && $(NPM) dev
 
+build:
+	$(NPM) build
+
 deploy:
 	$(FIREBASE) deploy

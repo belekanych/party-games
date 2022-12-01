@@ -1,23 +1,36 @@
 <script setup>
-// This starter template is using Vue 3 <script setup> SFCs
-// Check out https://vuejs.org/api/sfc-script-setup.html#script-setup
-import HelloWorld from './components/HelloWorld.vue'
+import { onMounted, ref  } from 'vue';
+import { getAuth, onAuthStateChanged, signOut } from 'firebase/auth';
+import { useRouter } from 'vue-router';
+
+const router = useRouter();
+
+const isLoggedIn = ref(false);
+
+let auth;
+onMounted(() => {
+  auth = getAuth();
+  onAuthStateChanged(auth, user => {
+    isLoggedIn.value = !!user; 
+  });
+});
+
+const handleSignOut = () => {
+  signOut(auth).then(() => {
+     router.push('/'); 
+  });
+};
 </script>
 
 <template>
-  <div>
-    <h1>Hello App!</h1>
-    <p>
-      <!-- use the router-link component for navigation. -->
-      <!-- specify the link by passing the `to` prop. -->
-      <!-- `<router-link>` will render an `<a>` tag with the correct `href` attribute -->
-      <router-link to="/">Go to Home</router-link>
-      <router-link to="/about">Go to About</router-link>
-    </p>
-    <!-- route outlet -->
-    <!-- component matched by the route will render here -->
-    <router-view></router-view>
-  </div>
+  <nav>
+    <router-link to="/"> Home </router-link> | 
+    <router-link to="/feed"> Feed </router-link> | 
+    <router-link to="/register"> Register </router-link> | 
+    <router-link to="/sign-in"> Login </router-link> |
+    <button v-if="isLoggedIn"  @click="handleSignOut">Sign out </button>
+  </nav>
+  <router-view />
 </template>
 
 <style scoped>
