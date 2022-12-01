@@ -1,5 +1,10 @@
-import { createApp } from 'vue'
-import './style.css'
-import App from './App.vue'
+import { createApp } from 'vue';
+import './style.css';
+import App from './App.vue';
+import { useVueFire } from './vendor/vuefire';
 
-createApp(App).mount('#app')
+const app = createApp(App);
+
+useVueFire(app)
+
+app.mount('#app');
