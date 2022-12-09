@@ -2,6 +2,8 @@
 import { onMounted, ref  } from 'vue';
 import { getAuth, onAuthStateChanged, signOut } from 'firebase/auth';
 import { useRouter } from 'vue-router';
+import GuestLayout from './layouts/Guest.vue';
+import MainLayout from './layouts/Main.vue';
 
 const router = useRouter();
 
@@ -23,14 +25,9 @@ const handleSignOut = () => {
 </script>
 
 <template>
-  <nav>
-    <router-link to="/"> Home </router-link> | 
-    <router-link to="/feed"> Feed </router-link> | 
-    <router-link to="/register"> Register </router-link> | 
-    <router-link to="/sign-in"> Login </router-link> |
-    <button v-if="isLoggedIn"  @click="handleSignOut">Sign out </button>
-  </nav>
-  <router-view />
+  <component :is="!isLoggedIn ? MainLayout : GuestLayout">
+    <router-view />
+  </component>
 </template>
 
 <style scoped>

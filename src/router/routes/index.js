@@ -9,4 +9,6 @@ export default [
        requiresAuth: true,
     },
   },
+  { path: '/games', component: () => import('../../views/Games.vue') },
+  { path: '/under-development', component: () => import('../../views/UnderDevelopment.vue') },
 ];
