@@ -1,7 +1,9 @@
 <template>
   <div>
-    <slot></slot>
-    <nav class="fixed bottom-0 w-full flex justify-around bg-teal-600 text-white text-bold">
+    <div class="p-6">
+      <slot></slot>
+    </div>
+    <nav class="fixed bottom-0 w-full flex justify-around bg-black text-white text-bold">
       <a href="/games" class="py-4 px-6">
         <font-awesome-icon icon="fa-solid fa-gamepad" />
       </a>

@@ -51,10 +51,41 @@ const signInWithGoogle = () => {
 </script>
 
 <template>
-  <h1>Sign in to  an Account</h1>
-  <p><input type="email" placeholder="Email" v-model="email" /></p>
-  <p><input type="password" placeholder="Password" v-model="password" /></p>
-  <p v-if="errMsg">{{ errMsg  }}</p>
-  <p><button @click="login">Sign In</button></p>
-  <p><button @click="signInWithGoogle">Sign In With Google</button></p>
+  <h1 class="text-5xl font-bold mb-4">Sign in</h1>
+  <div class="mb-8">
+    <input
+      class="block bg-white w-full p-2 border-2 border-black rounded-md shadow-brutal font-bold mb-4"
+      type="email"
+      placeholder="Email"
+      v-model="email"
+    />
+    <input
+      class="block bg-white w-full p-2 border-2 border-black rounded-md shadow-brutal font-bold mb-4"
+      type="password"
+      placeholder="Password"
+      v-model="password"
+    />
+    <p
+      v-if="errMsg"
+      class="block bg-red text-white shadow-black w-full p-2 border-2 border-black rounded-md shadow-brutal font-bold mb-4"
+    >
+      {{ errMsg }}
+    </p>
+  </div>
+  <button
+    class="block bg-white w-full p-2 border-2 border-black rounded-md shadow-brutal font-bold mb-4"
+    @click="login"
+  >
+    Sign In
+  </button>
+  <button
+    class="block bg-white w-full p-2 border-2 border-black rounded-md shadow-brutal font-bold"
+    @click="signInWithGoogle"
+  >
+    <font-awesome-icon
+      class="mr-4"
+      icon="fa-brands fa-google"
+    />
+    Sign in with Google
+  </button>
 </template>
