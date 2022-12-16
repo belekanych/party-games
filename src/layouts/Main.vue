@@ -4,18 +4,18 @@
       <slot></slot>
     </div>
     <nav class="fixed bottom-0 w-full flex justify-around bg-black text-white text-bold">
-      <a href="/games" class="py-4 px-6">
+      <router-link to="/" class="py-4 px-6">
         <font-awesome-icon icon="fa-solid fa-gamepad" />
-      </a>
-      <a href="/under-development" disabled class="py-4 px-6 opacity-75">
+      </router-link>
+      <router-link to="/under-development" disabled class="py-4 px-6 opacity-75">
         <font-awesome-icon icon="fa-solid fa-trophy" />
-      </a>
-      <a href="/under-development" class="py-4 px-6 opacity-75">
+      </router-link>
+      <router-link to="/under-development" class="py-4 px-6 opacity-75">
         <font-awesome-icon icon="fa-solid fa-clock-rotate-left" />
-      </a>
-      <a href="/sign-in" class="py-4 px-6">
+      </router-link>
+      <router-link to="/profile" class="py-4 px-6">
         <font-awesome-icon icon="fa-solid fa-user" />
-      </a>
+      </router-link>
     </nav>
   </div>
 </template>

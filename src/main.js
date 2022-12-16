@@ -8,9 +8,9 @@ import { useFontAwesome } from './vendor/fontawesome';
 
 const app = createApp(App);
 
+usePinia(app);
 useFontAwesome(app);
 useVueFire(app);
 useRouter(app);
-usePinia(app);
 
 app.mount('#app');

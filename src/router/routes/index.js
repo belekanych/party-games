@@ -1,14 +1,31 @@
+import games from './games';
+
 export default [
-  { path: '/', component: () => import('../../views/Home.vue') },
-  { path: '/register', component: () => import('../../views/Register.vue') },
-  { path: '/sign-in', component: () => import('../../views/SignIn.vue') },
   {
-    path: '/feed',
-    component: () => import('../../views/Feed.vue'),
+    path: '/',
+    component: () => import('../../views/Games.vue'),
+  },
+  {
+    path: '/register',
+    component: () => import('../../views/Register.vue'),
     meta: {
-       requiresAuth: true,
+      guest: true,
     },
   },
-  { path: '/games', component: () => import('../../views/Games.vue') },
+  {
+    path: '/sign-in',
+    component: () => import('../../views/SignIn.vue'),
+    meta: {
+      guest: true,
+    },
+  },
   { path: '/under-development', component: () => import('../../views/UnderDevelopment.vue') },
+  {
+    path: '/profile',
+    component: () => import('../../views/Profile.vue'),
+    meta: {
+      auth: true,
+    },
+  },
+  ...games,
 ];

@@ -2,19 +2,16 @@
 import { onMounted, ref  } from 'vue';
 import { getAuth, onAuthStateChanged, signOut } from 'firebase/auth';
 import { useRouter } from 'vue-router';
+import { useAuthStore } from './store/auth';
 import GuestLayout from './layouts/Guest.vue';
 import MainLayout from './layouts/Main.vue';
 
 const router = useRouter();
 
-const isLoggedIn = ref(false);
+const authStore = useAuthStore();
 
-let auth;
 onMounted(() => {
-  auth = getAuth();
-  onAuthStateChanged(auth, user => {
-    isLoggedIn.value = !!user; 
-  });
+  authStore.init();
 });
 
 const handleSignOut = () => {
@@ -25,7 +22,7 @@ const handleSignOut = () => {
 </script>
 
 <template>
-  <component :is="!isLoggedIn ? MainLayout : GuestLayout">
+  <component :is="authStore.isLoggedIn ? MainLayout : GuestLayout">
     <router-view />
   </component>
 </template>

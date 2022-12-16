@@ -1,6 +1,6 @@
 import routes from './routes';
 import { createRouter, createWebHistory } from 'vue-router';
-import { getAuth, onAuthStateChanged  } from 'firebase/auth';
+import { useAuthStore } from '../store/auth';
 
 // 3. Create the router instance and pass the `routes` option
 // You can pass in additional options here, but let's
@@ -11,30 +11,23 @@ const router = createRouter({
   routes, // short for `routes: routes`
 })
 
-const getCurrentUser = () => {
-  return new Promise((resolve, reject) => {
-    const removeListener = onAuthStateChanged(
-      getAuth(),
-      user => {
-        removeListener();
-        resolve(user); 
-      },
-      reject 
-    )
-  });
-};
+router.beforeEach(async (to, from, next) => {
+  const authStore = useAuthStore();
 
-router.beforeEach(async   (to, from, next) => {
-   if (to.matched.some(record => record.meta.requiresAuth)) {
-    if (await getCurrentUser()) {
-      next(); 
+  const auth = to.matched.some(route => route.meta.auth);
+  const guest = to.matched.some(route => route.meta.guest);
+
+  if (auth || guest) {
+    const user = await authStore.getCurrentUser();
+
+    if ((user && auth) || (!user && guest)) {
+      next();
     } else {
-      alert('You don\'t have access!');
-      next('/'); 
+      next(auth ? '/sign-in' : '/');
     }
-   } else {
+  } else {
     next(); 
-   }
+  }
 });
 
 export const useRouter = (app) => {

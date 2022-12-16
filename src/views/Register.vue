@@ -17,7 +17,7 @@ const register = () => {
   createUserWithEmailAndPassword(getAuth(), email.value, password.value)
     .then(data => {
       console.log('Successfully registered!');
-      router.push('/feed');
+      router.push('/');
     })
     .catch(error => {
       console.error(error.code);
@@ -30,7 +30,7 @@ const signInWithGoogle = () => {
 
   signInWithPopup(getAuth(), provider)
     .then(() => {
-      router.push('/feed'); 
+      router.push('/'); 
     })
     .catch(() => {});
 };
